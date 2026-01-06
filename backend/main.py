@@ -92,9 +92,9 @@ async def health_check():
     }
 
 
-# Router-ek regisztrálása (később a 3. fázisban)
-# from backend.api import routes
-# app.include_router(routes.router, prefix="/api")
+# Router-ek regisztrálása
+from backend.api.routes import router
+app.include_router(router)
 
 if __name__ == "__main__":
     import uvicorn
