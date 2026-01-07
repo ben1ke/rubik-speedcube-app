@@ -69,3 +69,22 @@ pytest test_app.py -v
 ```
 
 3 teszt: procedurális, funkcionális (parametrize), OOP
+
+## ☁️ Deployment
+
+### Backend (Render.com)
+1. Push kód GitHub-ra
+2. https://render.com → New Web Service
+3. Connect repository
+4. Build: `pip install -r requirements.txt`
+5. Start: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+6. Másold ki a deployed URL-t (pl. `https://rubik-api.onrender.com`)
+
+### Frontend (Streamlit Cloud)
+1. https://streamlit.io/cloud → New app
+2. Repository, branch, `app.py` kiválasztása
+3. **Secrets** (Settings → Secrets):
+   ```toml
+   API_URL = "https://rubik-api.onrender.com"
+   ```
+4. Deploy
