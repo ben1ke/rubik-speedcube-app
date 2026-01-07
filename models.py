@@ -2,10 +2,9 @@
 ORM modellek SQLAlchemy-val - OBJEKTUM-ORIENTÁLT PARADIGMA
 """
 from sqlalchemy import Column, Integer, String, Float, DateTime, create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from datetime import datetime
-from pydantic import BaseModel, Field
+from sqlalchemy.orm import declarative_base, sessionmaker
+from datetime import datetime, timezone
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional
 import os
 
@@ -38,7 +37,7 @@ class SolveTime(Base):
     id = Column(Integer, primary_key=True, index=True)
     time = Column(Float, nullable=False)
     scramble = Column(String(500), nullable=False)
-    date = Column(DateTime, default=datetime.utcnow)
+    date = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 
 class Scramble(Base):
@@ -47,7 +46,7 @@ class Scramble(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     scramble = Column(String(500), nullable=False, unique=True)
-    date = Column(DateTime, default=datetime.utcnow)
+    date = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     used = Column(Integer, default=0)
 
 
@@ -60,24 +59,22 @@ class SolveTimeCreate(BaseModel):
 
 class SolveTimeResponse(BaseModel):
     """Solve time response séma."""
+    model_config = ConfigDict(from_attributes=True)
+    
     id: int
     time: float
     scramble: str
     date: datetime
-    
-    class Config:
-        from_attributes = True
 
 
 class ScrambleResponse(BaseModel):
     """Scramble response séma."""
+    model_config = ConfigDict(from_attributes=True)
+    
     id: int
     scramble: str
     date: datetime
     used: int
-    
-    class Config:
-        from_attributes = True
 
 
 class StatsResponse(BaseModel):

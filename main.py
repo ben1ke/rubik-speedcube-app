@@ -1,7 +1,7 @@
 """
 FastAPI Backend - REST API
 """
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from models import (
     init_db, get_db, 
     SolveTimeCreate, SolveTimeResponse, 
-    ScrambleResponse, StatsResponse
+    StatsResponse
 )
 from services import TimerService, ScrambleService, generate_scramble
 

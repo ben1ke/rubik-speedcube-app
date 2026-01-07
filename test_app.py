@@ -8,7 +8,6 @@ from sqlalchemy.pool import StaticPool
 from models import Base, SolveTime
 from services import (
     generate_scramble, 
-    format_time, 
     calculate_average,
     TimerService
 )
