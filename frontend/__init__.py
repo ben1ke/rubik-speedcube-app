@@ -1,3 +1,0 @@
-"""
-Frontend csomag - Streamlit alkalmazás.
-"""
